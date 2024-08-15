@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://c1lihmnsbrxt6"]
+
+[ext_resource type="Texture2D" uid="uid://dgub66tjqvfmv" path="res://assets/art/maze_parts.png" id="1_sw7ha"]
+
+[resource]
+atlas = ExtResource("1_sw7ha")
+region = Rect2(8, 24, 8, 8)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwrksntd1hk2y"]
+
+[ext_resource type="Script" path="res://scripts/number_popup.gd" id="1_tsn0l"]
+
+[node name="NumberPopup" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_tsn0l")
+color = Color(0.870588, 0.870588, 1, 1)

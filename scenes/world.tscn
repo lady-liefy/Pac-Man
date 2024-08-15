@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3ijkwmrxhxf1"]
+
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_gboxl"]
+[ext_resource type="PackedScene" uid="uid://clunpvoh2n2nl" path="res://scenes/level.tscn" id="3_6wu20"]
+[ext_resource type="PackedScene" uid="uid://btq3opu7jlaxs" path="res://scenes/player.tscn" id="3_18hou"]
+[ext_resource type="PackedScene" uid="uid://7fov7i38bxxu" path="res://scenes/gui.tscn" id="4_2d3a0"]
+[ext_resource type="PackedScene" uid="uid://dthddglqupib" path="res://scenes/ghost.tscn" id="5_mfawg"]
+
+[node name="World" type="Node"]
+script = ExtResource("1_gboxl")
+
+[node name="GUI" parent="." instance=ExtResource("4_2d3a0")]
+
+[node name="Level0" parent="." instance=ExtResource("3_6wu20")]
+
+[node name="Player" parent="." instance=ExtResource("3_18hou")]
+position = Vector2(112, 212)
+
+[node name="Ghost" parent="." instance=ExtResource("5_mfawg")]
+position = Vector2(112, 116)

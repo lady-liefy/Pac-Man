@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bn2wucpo4qbee"]
+
+[ext_resource type="Script" path="res://scripts/pellet.gd" id="1_ohxk5"]
+[ext_resource type="Texture2D" uid="uid://dgub66tjqvfmv" path="res://assets/art/maze_parts.png" id="2_3ee6x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fn0my"]
+atlas = ExtResource("2_3ee6x")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vlolb"]
+radius = 2.0
+
+[node name="Pellet" type="Area2D" groups=["pickup"]]
+collision_layer = 8
+script = ExtResource("1_ohxk5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_fn0my")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vlolb")

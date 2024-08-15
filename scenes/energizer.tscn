@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://deyfqqvuxlcai"]
+
+[ext_resource type="Script" path="res://scripts/energizer.gd" id="1_55sg8"]
+[ext_resource type="Texture2D" uid="uid://dgub66tjqvfmv" path="res://assets/art/maze_parts.png" id="2_7yri7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fn0my"]
+atlas = ExtResource("2_7yri7")
+region = Rect2(8, 24, 8, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vlolb"]
+radius = 2.0
+
+[node name="Energizer" type="Area2D" groups=["pickup"]]
+collision_layer = 8
+script = ExtResource("1_55sg8")
+type = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_fn0my")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vlolb")

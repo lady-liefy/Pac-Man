@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://cr7iupw6q1gik"]
+
+[ext_resource type="Texture2D" uid="uid://fecredgrbqn6" path="res://assets/art/text.png" id="1_ougaf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shmbd"]
+atlas = ExtResource("1_ougaf")
+region = Rect2(16, 200, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6b5q"]
+atlas = ExtResource("1_ougaf")
+region = Rect2(32, 192, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqmuf"]
+atlas = ExtResource("1_ougaf")
+region = Rect2(0, 192, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ht7nk"]
+atlas = ExtResource("1_ougaf")
+region = Rect2(24, 192, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmws8"]
+atlas = ExtResource("1_ougaf")
+region = Rect2(72, 200, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vpit"]
+atlas = ExtResource("1_ougaf")
+region = Rect2(88, 200, 8, 8)
+
+[node name="Ready" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="R" type="TextureRect" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_shmbd")
+
+[node name="E" type="TextureRect" parent="."]
+offset_left = 8.0
+offset_right = 16.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_x6b5q")
+
+[node name="A" type="TextureRect" parent="."]
+offset_left = 16.0
+offset_right = 24.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_dqmuf")
+
+[node name="D" type="TextureRect" parent="."]
+offset_left = 24.0
+offset_right = 32.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_ht7nk")
+
+[node name="Y" type="TextureRect" parent="."]
+offset_left = 32.0
+offset_right = 40.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_cmws8")
+
+[node name="!" type="TextureRect" parent="."]
+offset_left = 40.0
+offset_right = 48.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_1vpit")

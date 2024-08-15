@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfdko35oh2bsg"]
+
+[ext_resource type="Texture2D" uid="uid://fecredgrbqn6" path="res://assets/art/text.png" id="1_ijg37"]
+[ext_resource type="Script" path="res://scripts/ui_digit.gd" id="2_s3mjl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fv14u"]
+atlas = ExtResource("1_ijg37")
+region = Rect2(0, 16, 8, 8)
+
+[node name="Digit" type="TextureRect"]
+custom_minimum_size = Vector2(8, 8)
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_fv14u")
+script = ExtResource("2_s3mjl")
+number = 0

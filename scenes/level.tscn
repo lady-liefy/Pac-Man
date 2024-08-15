@@ -1,0 +1,766 @@
+[gd_scene load_steps=8 format=3 uid="uid://clunpvoh2n2nl"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_dj7c3"]
+[ext_resource type="TileSet" uid="uid://dlxgdircw2h34" path="res://assets/art/hud_tileset.tres" id="2_lhuly"]
+[ext_resource type="Script" path="res://scripts/pickup_manager.gd" id="3_vb0wq"]
+[ext_resource type="PackedScene" uid="uid://cr7iupw6q1gik" path="res://scenes/ready.tscn" id="4_30fuq"]
+[ext_resource type="PackedScene" uid="uid://bn2wucpo4qbee" path="res://scenes/pellet.tscn" id="4_dqh2q"]
+[ext_resource type="AudioStream" uid="uid://bfkbx8ajlte2k" path="res://assets/audio/pacman_beginning.wav" id="5_gpd5y"]
+[ext_resource type="PackedScene" uid="uid://deyfqqvuxlcai" path="res://scenes/energizer.tscn" id="7_myyv8"]
+
+[node name="Level" type="Node2D" groups=["level"]]
+script = ExtResource("1_dj7c3")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_lhuly")
+rendering_quadrant_size = 8
+collision_animatable = true
+format = 2
+layer_0/name = "Background"
+layer_0/tile_data = PackedInt32Array(196616, 524291, 0, 262152, 5505027, 30, 327688, 524291, 2, 393224, 524291, 3, 458760, 524291, 4, 524296, 5505027, 30, 589832, 524291, 6, 655368, 524291, 7, 720904, 524291, 8, 786440, 524291, 9, 851976, 524291, 10, 917512, 524291, 11, 983048, 524291, 12, 1048584, 524291, 13, 1114120, 524291, 14, 1179656, 524291, 15, 1245192, 524291, 16, 1310728, 524291, 17, 1376264, 524291, 18, 1441800, 524291, 19, 1507336, 5505027, 30, 1572872, 524291, 21, 1638408, 524291, 22, 1703944, 5505027, 30, 1769480, 524291, 24, 1835016, 524291, 25, 1900552, 524291, 26, 1966088, 524291, 27, 2031624, 524291, 28, 2097160, 5505027, 30, 2162696, 524291, 30, 196617, 589827, 0, 262153, 5505027, 30, 327689, 589827, 2, 393225, 589827, 3, 458761, 589827, 4, 524297, 5505027, 30, 589833, 5505027, 30, 655369, 5505027, 30, 720905, 5505027, 30, 786441, 589827, 9, 851977, 589827, 10, 917513, 589827, 11, 983049, 589827, 12, 1048585, 589827, 13, 1114121, 589827, 14, 1179657, 589827, 15, 1245193, 589827, 16, 1310729, 589827, 17, 1376265, 589827, 18, 1441801, 589827, 19, 1507337, 5505027, 30, 1572873, 589827, 21, 1638409, 589827, 22, 1703945, 5505027, 30, 1769481, 5505027, 30, 1835017, 5505027, 30, 1900553, 5505027, 30, 1966089, 589827, 27, 2031625, 589827, 28, 2097161, 5505027, 30, 2162697, 589827, 30, 196618, 655363, 0, 262154, 5505027, 30, 327690, 655363, 2, 393226, 655363, 3, 458762, 655363, 4, 524298, 5505027, 30, 589834, 655363, 6, 655370, 655363, 7, 720906, 5505027, 30, 786442, 655363, 9, 851978, 655363, 10, 917514, 655363, 11, 983050, 655363, 12, 1048586, 655363, 13, 1114122, 655363, 14, 1179658, 655363, 15, 1245194, 655363, 16, 1310730, 655363, 17, 1376266, 655363, 18, 1441802, 655363, 19, 1507338, 5505027, 30, 1572874, 655363, 21, 1638410, 655363, 22, 1703946, 5505027, 30, 1769482, 655363, 24, 1835018, 655363, 25, 1900554, 5505027, 30, 1966090, 655363, 27, 2031626, 655363, 28, 2097162, 5505027, 30, 2162698, 655363, 30, 196619, 720899, 0, 262155, 5505027, 30, 327691, 720899, 2, 393227, 720899, 3, 458763, 720899, 4, 524299, 5505027, 30, 589835, 720899, 6, 655371, 720899, 7, 720907, 5505027, 30, 786443, 720899, 9, 851979, 720899, 10, 917515, 720899, 11, 983051, 720899, 12, 1048587, 720899, 13, 1114123, 720899, 14, 1179659, 720899, 15, 1245195, 720899, 16, 1310731, 720899, 17, 1376267, 720899, 18, 1441803, 720899, 19, 1507339, 5505027, 30, 1572875, 720899, 21, 1638411, 720899, 22, 1703947, 5505027, 30, 1769483, 720899, 24, 1835019, 720899, 25, 1900555, 5505027, 30, 1966091, 720899, 27, 2031627, 720899, 28, 2097163, 5505027, 30, 2162699, 720899, 30, 196620, 786435, 0, 262156, 5505027, 30, 327692, 5505027, 30, 393228, 5505027, 30, 458764, 5505027, 30, 524300, 5505027, 30, 589836, 786435, 6, 655372, 786435, 7, 720908, 5505027, 30, 786444, 786435, 9, 851980, 786435, 10, 917516, 786435, 11, 983052, 786435, 12, 1048588, 786435, 13, 1114124, 786435, 14, 1179660, 786435, 15, 1245196, 786435, 16, 1310732, 786435, 17, 1376268, 786435, 18, 1441804, 786435, 19, 1507340, 5505027, 30, 1572876, 5505027, 30, 1638412, 5505027, 30, 1703948, 5505027, 30, 1769484, 786435, 24, 1835020, 786435, 25, 1900556, 5505027, 30, 1966092, 5505027, 30, 2031628, 5505027, 30, 2097164, 5505027, 30, 2162700, 786435, 30, 196621, 851971, 0, 262157, 851971, 1, 327693, 851971, 2, 393229, 851971, 3, 458765, 851971, 4, 524301, 5505027, 30, 589837, 851971, 6, 655373, 851971, 7, 720909, 851971, 8, 786445, 851971, 9, 851981, 851971, 10, 917517, 851971, 11, 983053, 851971, 12, 1048589, 851971, 13, 1114125, 851971, 14, 1179661, 851971, 15, 1245197, 851971, 16, 1310733, 851971, 17, 1376269, 851971, 18, 1441805, 851971, 19, 1507341, 851971, 20, 1572877, 851971, 21, 1638413, 851971, 22, 1703949, 5505027, 30, 1769485, 851971, 24, 1835021, 851971, 25, 1900557, 851971, 26, 1966093, 851971, 27, 2031629, 851971, 28, 2097165, 5505027, 30, 2162701, 851971, 30, 196622, 917507, 0, 262158, 917507, 1, 327694, 917507, 2, 393230, 917507, 3, 458766, 917507, 4, 524302, 5505027, 30, 589838, 917507, 6, 655374, 917507, 7, 720910, 917507, 8, 786446, 917507, 9, 851982, 917507, 10, 917518, 917507, 11, 983054, 917507, 12, 1048590, 917507, 13, 1114126, 917507, 14, 1179662, 917507, 15, 1245198, 917507, 16, 1310734, 917507, 17, 1376270, 917507, 18, 1441806, 917507, 19, 1507342, 917507, 20, 1572878, 917507, 21, 1638414, 917507, 22, 1703950, 917507, 23, 1769486, 917507, 24, 1835022, 917507, 25, 1900558, 917507, 26, 1966094, 917507, 27, 2031630, 917507, 28, 2097166, 5505027, 30, 2162702, 917507, 30, 196623, 983043, 0, 262159, 5505027, 30, 327695, 5505027, 30, 393231, 5505027, 30, 458767, 5505027, 30, 524303, 5505027, 30, 589839, 983043, 6, 655375, 983043, 7, 720911, 5505027, 30, 786447, 983043, 9, 851983, 983043, 10, 917519, 983043, 11, 983055, 983043, 12, 1048591, 983043, 13, 1114127, 983043, 14, 1179663, 983043, 15, 1245199, 983043, 16, 1310735, 983043, 17, 1376271, 983043, 18, 1441807, 983043, 19, 1507343, 5505027, 30, 1572879, 5505027, 30, 1638415, 5505027, 30, 1703951, 5505027, 30, 1769487, 983043, 24, 1835023, 983043, 25, 1900559, 5505027, 30, 1966095, 5505027, 30, 2031631, 5505027, 30, 2097167, 5505027, 30, 2162703, 983043, 30, 196624, 1048579, 0, 262160, 5505027, 30, 327696, 1048579, 2, 393232, 1048579, 3, 458768, 1048579, 4, 524304, 5505027, 30, 589840, 1048579, 6, 655376, 1048579, 7, 720912, 5505027, 30, 786448, 1048579, 9, 851984, 1048579, 10, 917520, 1048579, 11, 983056, 1048579, 12, 1048592, 1048579, 13, 1114128, 1048579, 14, 1179664, 1048579, 15, 1245200, 1048579, 16, 1310736, 1048579, 17, 1376272, 1048579, 18, 1441808, 1048579, 19, 1507344, 5505027, 30, 1572880, 1048579, 21, 1638416, 1048579, 22, 1703952, 5505027, 30, 1769488, 1048579, 24, 1835024, 1048579, 25, 1900560, 5505027, 30, 1966096, 1048579, 27, 2031632, 1048579, 28, 2097168, 5505027, 30, 2162704, 1048579, 30, 196625, 1114115, 0, 262161, 5505027, 30, 327697, 1114115, 2, 393233, 1114115, 3, 458769, 1114115, 4, 524305, 5505027, 30, 589841, 1114115, 6, 655377, 1114115, 7, 720913, 5505027, 30, 786449, 1114115, 9, 851985, 1114115, 10, 917521, 1114115, 11, 983057, 1114115, 12, 1048593, 1114115, 13, 1114129, 1114115, 14, 1179665, 1114115, 15, 1245201, 1114115, 16, 1310737, 1114115, 17, 1376273, 1114115, 18, 1441809, 1114115, 19, 1507345, 5505027, 30, 1572881, 1114115, 21, 1638417, 1114115, 22, 1703953, 5505027, 30, 1769489, 1114115, 24, 1835025, 1114115, 25, 1900561, 5505027, 30, 1966097, 1114115, 27, 2031633, 1114115, 28, 2097169, 5505027, 30, 2162705, 1114115, 30, 196626, 1179651, 0, 262162, 5505027, 30, 327698, 1179651, 2, 393234, 1179651, 3, 458770, 1179651, 4, 524306, 5505027, 30, 589842, 5505027, 30, 655378, 5505027, 30, 720914, 5505027, 30, 786450, 1179651, 9, 851986, 1179651, 10, 917522, 1179651, 11, 983058, 1179651, 12, 1048594, 1179651, 13, 1114130, 1179651, 14, 1179666, 1179651, 15, 1245202, 1179651, 16, 1310738, 1179651, 17, 1376274, 1179651, 18, 1441810, 1179651, 19, 1507346, 5505027, 30, 1572882, 1179651, 21, 1638418, 1179651, 22, 1703954, 5505027, 30, 1769490, 5505027, 30, 1835026, 5505027, 30, 1900562, 5505027, 30, 1966098, 1179651, 27, 2031634, 1179651, 28, 2097170, 5505027, 30, 2162706, 1179651, 30, 196627, 1245187, 0, 262163, 5505027, 30, 327699, 1245187, 2, 393235, 1245187, 3, 458771, 1245187, 4, 524307, 5505027, 30, 589843, 1245187, 6, 655379, 1245187, 7, 720915, 1245187, 8, 786451, 1245187, 9, 851987, 1245187, 10, 917523, 1245187, 11, 983059, 1245187, 12, 1048595, 1245187, 13, 1114131, 1245187, 14, 1179667, 1245187, 15, 1245203, 1245187, 16, 1310739, 1245187, 17, 1376275, 1245187, 18, 1441811, 1245187, 19, 1507347, 5505027, 30, 1572883, 1245187, 21, 1638419, 1245187, 22, 1703955, 5505027, 30, 1769491, 1245187, 24, 1835027, 1245187, 25, 1900563, 1245187, 26, 1966099, 1245187, 27, 2031635, 1245187, 28, 2097171, 5505027, 30, 2162707, 1245187, 30, 196628, 1310723, 0, 262164, 5505027, 30, 327700, 1310723, 2, 393236, 1310723, 3, 458772, 1310723, 4, 524308, 5505027, 30, 589844, 1310723, 6, 655380, 1310723, 7, 720916, 1310723, 8, 786452, 1310723, 9, 851988, 1310723, 10, 917524, 1310723, 11, 983060, 1310723, 12, 1048596, 1310723, 13, 1114132, 1310723, 14, 1179668, 1310723, 15, 1245204, 1310723, 16, 1310740, 1310723, 17, 1376276, 1310723, 18, 1441812, 1310723, 19, 1507348, 5505027, 30, 1572884, 1310723, 21, 1638420, 1310723, 22, 1703956, 5505027, 30, 1769492, 1310723, 24, 1835028, 1310723, 25, 1900564, 1310723, 26, 1966100, 1310723, 27, 2031636, 1310723, 28, 2097172, 5505027, 30, 2162708, 1310723, 30, 196629, 1376259, 0, 262165, 5505027, 30, 327701, 5505027, 30, 393237, 5505027, 30, 458773, 5505027, 30, 524309, 5505027, 30, 589845, 5505027, 30, 655381, 5505027, 30, 720917, 5505027, 30, 786453, 5505027, 30, 851989, 5505027, 30, 917525, 5505027, 30, 983061, 5505027, 30, 1048597, 5505027, 30, 1114133, 5505027, 30, 1179669, 5505027, 30, 1245205, 5505027, 30, 1310741, 5505027, 30, 1376277, 5505027, 30, 1441813, 5505027, 30, 1507349, 5505027, 30, 1572885, 5505027, 30, 1638421, 5505027, 30, 1703957, 5505027, 30, 1769493, 5505027, 30, 1835029, 5505027, 30, 1900565, 5505027, 30, 1966101, 1376259, 27, 2031637, 1376259, 28, 2097173, 5505027, 30, 2162709, 1376259, 30, 196630, 1441795, 0, 262166, 5505027, 30, 327702, 1441795, 2, 393238, 1441795, 3, 458774, 1441795, 4, 524310, 5505027, 30, 589846, 1441795, 6, 655382, 1441795, 7, 720918, 5505027, 30, 786454, 1441795, 9, 851990, 1441795, 10, 917526, 1441795, 11, 983062, 1441795, 12, 1048598, 1441795, 13, 1114134, 1441795, 14, 1179670, 1441795, 15, 1245206, 1441795, 16, 1310742, 1441795, 17, 1376278, 1441795, 18, 1441814, 1441795, 19, 1507350, 5505027, 30, 1572886, 1441795, 21, 1638422, 1441795, 22, 1703958, 1441795, 23, 1769494, 1441795, 24, 1835030, 1441795, 25, 1900566, 5505027, 30, 1966102, 1441795, 27, 2031638, 1441795, 28, 2097174, 5505027, 30, 2162710, 1441795, 30, 196631, 1507331, 0, 262167, 5505027, 30, 327703, 1507331, 2, 393239, 1507331, 3, 458775, 1507331, 4, 524311, 5505027, 30, 589847, 1507331, 6, 655383, 1507331, 7, 720919, 5505027, 30, 786455, 1507331, 9, 851991, 1507331, 10, 917527, 1507331, 11, 983063, 1507331, 12, 1048599, 1507331, 13, 1114135, 1507331, 14, 1179671, 1507331, 15, 1245207, 1507331, 16, 1310743, 1507331, 17, 1376279, 1507331, 18, 1441815, 1507331, 19, 1507351, 5505027, 30, 1572887, 1507331, 21, 1638423, 1507331, 22, 1703959, 1507331, 23, 1769495, 1507331, 24, 1835031, 1507331, 25, 1900567, 5505027, 30, 1966103, 1507331, 27, 2031639, 1507331, 28, 2097175, 5505027, 30, 2162711, 1507331, 30, 196632, 1572867, 0, 262168, 5505027, 30, 327704, 1572867, 2, 393240, 1572867, 3, 458776, 1572867, 4, 524312, 5505027, 30, 589848, 1572867, 6, 655384, 1572867, 7, 720920, 5505027, 30, 786456, 1572867, 9, 851992, 1572867, 10, 917528, 1572867, 11, 983064, 1572867, 12, 1048600, 1572867, 13, 1114136, 1572867, 14, 1179672, 1572867, 15, 1245208, 1572867, 16, 1310744, 1572867, 17, 1376280, 1572867, 18, 1441816, 1572867, 19, 1507352, 5505027, 30, 1572888, 1572867, 21, 1638424, 1572867, 22, 1703960, 5505027, 30, 1769496, 5505027, 30, 1835032, 5505027, 30, 1900568, 5505027, 30, 1966104, 1572867, 27, 2031640, 1572867, 28, 2097176, 5505027, 30, 2162712, 1572867, 30, 196633, 1638403, 0, 262169, 5505027, 30, 327705, 1638403, 2, 393241, 1638403, 3, 458777, 1638403, 4, 524313, 5505027, 30, 589849, 1638403, 6, 655385, 1638403, 7, 720921, 5505027, 30, 786457, 1638403, 9, 851993, 1638403, 10, 917529, 1638403, 11, 983065, 1638403, 12, 1048601, 1638403, 13, 1114137, 1638403, 14, 1179673, 1638403, 15, 1245209, 1638403, 16, 1310745, 1638403, 17, 1376281, 1638403, 18, 1441817, 1638403, 19, 1507353, 5505027, 30, 1572889, 1638403, 21, 1638425, 1638403, 22, 1703961, 5505027, 30, 1769497, 1638403, 24, 1835033, 1638403, 25, 1900569, 5505027, 30, 1966105, 1638403, 27, 2031641, 1638403, 28, 2097177, 5505027, 30, 2162713, 1638403, 30, 196634, 1703939, 0, 262170, 5505027, 30, 327706, 5505027, 30, 393242, 5505027, 30, 458778, 5505027, 30, 524314, 5505027, 30, 589850, 5505027, 30, 655386, 5505027, 30, 720922, 5505027, 30, 786458, 1703939, 9, 851994, 1703939, 10, 917530, 1703939, 11, 983066, 1703939, 12, 1048602, 1703939, 13, 1114138, 1703939, 14, 1179674, 1703939, 15, 1245210, 1703939, 16, 1310746, 1703939, 17, 1376282, 1703939, 18, 1441818, 1703939, 19, 1507354, 5505027, 30, 1572890, 5505027, 30, 1638426, 5505027, 30, 1703962, 5505027, 30, 1769498, 1703939, 24, 1835034, 1703939, 25, 1900570, 5505027, 30, 1966106, 5505027, 30, 2031642, 5505027, 30, 2097178, 5505027, 30, 2162714, 1703939, 30, 196635, 1769475, 0, 262171, 1769475, 1, 327707, 1769475, 2, 393243, 1769475, 3, 458779, 1769475, 4, 524315, 1769475, 5, 589851, 1769475, 6, 655387, 1769475, 7, 720923, 1769475, 8, 786459, 1769475, 9, 851995, 1769475, 10, 917531, 1769475, 11, 983067, 1769475, 12, 1048603, 1769475, 13, 1114139, 1769475, 14, 1179675, 1769475, 15, 1245211, 1769475, 16, 1310747, 1769475, 17, 1376283, 1769475, 18, 1441819, 1769475, 19, 1507355, 1769475, 20, 1572891, 1769475, 21, 1638427, 1769475, 22, 1703963, 1769475, 23, 1769499, 1769475, 24, 1835035, 1769475, 25, 1900571, 1769475, 26, 1966107, 1769475, 27, 2031643, 1769475, 28, 2097179, 1769475, 29, 2162715, 1769475, 30, 196608, 3, 0, 262144, 3, 1, 327680, 3, 2, 393216, 3, 3, 458752, 3, 4, 524288, 3, 5, 589824, 3, 6, 655360, 3, 7, 720896, 3, 8, 786432, 3, 9, 851968, 3, 10, 917504, 3, 11, 983040, 3, 12, 1048576, 3, 13, 1114112, 3, 14, 1179648, 3, 15, 1245184, 3, 16, 1310720, 3, 17, 1376256, 3, 18, 1441792, 3, 19, 1507328, 3, 20, 1572864, 3, 21, 1638400, 3, 22, 1703936, 3, 23, 1769472, 3, 24, 1835008, 3, 25, 1900544, 3, 26, 1966080, 3, 27, 2031616, 3, 28, 2097152, 3, 29, 2162688, 3, 30, 196609, 65539, 0, 262145, 5505027, 30, 327681, 5505027, 30, 393217, 5505027, 30, 458753, 5505027, 30, 524289, 5505027, 30, 589825, 5505027, 30, 655361, 5505027, 30, 720897, 5505027, 30, 786433, 65539, 9, 851969, 65539, 10, 917505, 65539, 11, 983041, 65539, 12, 1048577, 65539, 13, 1114113, 65539, 14, 1179649, 65539, 15, 1245185, 65539, 16, 1310721, 65539, 17, 1376257, 65539, 18, 1441793, 65539, 19, 1507329, 5505027, 30, 1572865, 5505027, 30, 1638401, 5505027, 30, 1703937, 5505027, 30, 1769473, 65539, 24, 1835009, 65539, 25, 1900545, 5505027, 30, 1966081, 5505027, 30, 2031617, 5505027, 30, 2097153, 5505027, 30, 2162689, 65539, 30, 196610, 131075, 0, 262146, 5505027, 30, 327682, 131075, 2, 393218, 131075, 3, 458754, 131075, 4, 524290, 5505027, 30, 589826, 131075, 6, 655362, 131075, 7, 720898, 5505027, 30, 786434, 131075, 9, 851970, 131075, 10, 917506, 131075, 11, 983042, 131075, 12, 1048578, 131075, 13, 1114114, 131075, 14, 1179650, 131075, 15, 1245186, 131075, 16, 1310722, 131075, 17, 1376258, 131075, 18, 1441794, 131075, 19, 1507330, 5505027, 30, 1572866, 131075, 21, 1638402, 131075, 22, 1703938, 5505027, 30, 1769474, 131075, 24, 1835010, 131075, 25, 1900546, 5505027, 30, 1966082, 131075, 27, 2031618, 131075, 28, 2097154, 5505027, 30, 2162690, 131075, 30, 196611, 196611, 0, 262147, 5505027, 30, 327683, 196611, 2, 393219, 196611, 3, 458755, 196611, 4, 524291, 5505027, 30, 589827, 196611, 6, 655363, 196611, 7, 720899, 5505027, 30, 786435, 196611, 9, 851971, 196611, 10, 917507, 196611, 11, 983043, 196611, 12, 1048579, 196611, 13, 1114115, 196611, 14, 1179651, 196611, 15, 1245187, 196611, 16, 1310723, 196611, 17, 1376259, 196611, 18, 1441795, 196611, 19, 1507331, 5505027, 30, 1572867, 196611, 21, 1638403, 196611, 22, 1703939, 5505027, 30, 1769475, 5505027, 30, 1835011, 5505027, 30, 1900547, 5505027, 30, 1966083, 196611, 27, 2031619, 196611, 28, 2097155, 5505027, 30, 2162691, 196611, 30, 196612, 262147, 0, 262148, 5505027, 30, 327684, 262147, 2, 393220, 262147, 3, 458756, 262147, 4, 524292, 5505027, 30, 589828, 262147, 6, 655364, 262147, 7, 720900, 5505027, 30, 786436, 262147, 9, 851972, 262147, 10, 917508, 262147, 11, 983044, 262147, 12, 1048580, 262147, 13, 1114116, 262147, 14, 1179652, 262147, 15, 1245188, 262147, 16, 1310724, 262147, 17, 1376260, 262147, 18, 1441796, 262147, 19, 1507332, 5505027, 30, 1572868, 262147, 21, 1638404, 262147, 22, 1703940, 262147, 23, 1769476, 262147, 24, 1835012, 262147, 25, 1900548, 5505027, 30, 1966084, 262147, 27, 2031620, 262147, 28, 2097156, 5505027, 30, 2162692, 262147, 30, 196613, 327683, 0, 262149, 5505027, 30, 327685, 327683, 2, 393221, 327683, 3, 458757, 327683, 4, 524293, 5505027, 30, 589829, 327683, 6, 655365, 327683, 7, 720901, 5505027, 30, 786437, 327683, 9, 851973, 327683, 10, 917509, 327683, 11, 983045, 327683, 12, 1048581, 327683, 13, 1114117, 327683, 14, 1179653, 327683, 15, 1245189, 327683, 16, 1310725, 327683, 17, 1376261, 327683, 18, 1441797, 327683, 19, 1507333, 5505027, 30, 1572869, 327683, 21, 1638405, 327683, 22, 1703941, 327683, 23, 1769477, 327683, 24, 1835013, 327683, 25, 1900549, 5505027, 30, 1966085, 327683, 27, 2031621, 327683, 28, 2097157, 5505027, 30, 2162693, 327683, 30, 196614, 393219, 0, 262150, 5505027, 30, 327686, 5505027, 30, 393222, 5505027, 30, 458758, 5505027, 30, 524294, 5505027, 30, 589830, 5505027, 30, 655366, 5505027, 30, 720902, 5505027, 30, 786438, 5505027, 30, 851974, 5505027, 30, 917510, 5505027, 30, 983046, 5505027, 30, 1048582, 5505027, 30, 1114118, 5505027, 30, 1179654, 5505027, 30, 1245190, 5505027, 30, 1310726, 5505027, 30, 1376262, 5505027, 30, 1441798, 5505027, 30, 1507334, 5505027, 30, 1572870, 5505027, 30, 1638406, 5505027, 30, 1703942, 5505027, 30, 1769478, 5505027, 30, 1835014, 5505027, 30, 1900550, 5505027, 30, 1966086, 393219, 27, 2031622, 393219, 28, 2097158, 5505027, 30, 2162694, 393219, 30, 196615, 458755, 0, 262151, 5505027, 30, 327687, 458755, 2, 393223, 458755, 3, 458759, 458755, 4, 524295, 5505027, 30, 589831, 458755, 6, 655367, 458755, 7, 720903, 458755, 8, 786439, 458755, 9, 851975, 458755, 10, 917511, 458755, 11, 983047, 458755, 12, 1048583, 458755, 13, 1114119, 458755, 14, 1179655, 458755, 15, 1245191, 458755, 16, 1310727, 458755, 17, 1376263, 458755, 18, 1441799, 458755, 19, 1507335, 5505027, 30, 1572871, 458755, 21, 1638407, 458755, 22, 1703943, 5505027, 30, 1769479, 458755, 24, 1835015, 458755, 25, 1900551, 458755, 26, 1966087, 458755, 27, 2031623, 458755, 28, 2097159, 5505027, 30, 2162695, 458755, 30)
+
+[node name="PickupSpawner" type="Node" parent="."]
+script = ExtResource("3_vb0wq")
+
+[node name="Pickup" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(12, 260)
+
+[node name="Pickup17" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(20, 260)
+
+[node name="Pickup18" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(28, 260)
+
+[node name="Pickup43" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(20, 236)
+
+[node name="Pickup44" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(28, 236)
+
+[node name="Pickup47" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(28, 220)
+
+[node name="Pickup48" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(28, 228)
+
+[node name="Pickup45" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(20, 212)
+
+[node name="Pickup46" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(28, 212)
+
+[node name="Pickup19" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(36, 260)
+
+[node name="Pickup20" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(44, 260)
+
+[node name="Pickup21" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 260)
+
+[node name="Pickup22" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(60, 260)
+
+[node name="Pickup23" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(68, 260)
+
+[node name="Pickup24" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(76, 260)
+
+[node name="Pickup25" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(84, 260)
+
+[node name="Pickup26" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(92, 260)
+
+[node name="Pickup29" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(132, 260)
+
+[node name="Pickup30" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(140, 260)
+
+[node name="Pickup31" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(148, 260)
+
+[node name="Pickup32" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(156, 260)
+
+[node name="Pickup33" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(164, 260)
+
+[node name="Pickup82" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(156, 212)
+
+[node name="Pickup83" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(164, 212)
+
+[node name="Pickup34" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 260)
+
+[node name="Pickup35" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(180, 260)
+
+[node name="Pickup36" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(188, 260)
+
+[node name="Pickup37" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(196, 260)
+
+[node name="Pickup38" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(204, 260)
+
+[node name="Pickup39" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(76, 236)
+
+[node name="Pickup55" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(84, 236)
+
+[node name="Pickup56" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(92, 236)
+
+[node name="Pickup57" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(132, 236)
+
+[node name="Pickup58" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(140, 236)
+
+[node name="Pickup59" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(148, 236)
+
+[node name="Pickup60" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 236)
+
+[node name="Pickup61" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(180, 236)
+
+[node name="Pickup62" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(188, 236)
+
+[node name="Pickup63" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(196, 236)
+
+[node name="Pickup64" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(204, 236)
+
+[node name="Pickup27" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(108, 260)
+
+[node name="Pickup28" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(116, 260)
+
+[node name="Pickup2" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(12, 252)
+
+[node name="Pickup3" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(12, 244)
+
+[node name="Pickup4" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(12, 236)
+
+[node name="Pickup49" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(44, 236)
+
+[node name="Pickup50" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 236)
+
+[node name="Pickup65" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(76, 228)
+
+[node name="Pickup66" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(148, 228)
+
+[node name="Pickup67" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 228)
+
+[node name="Pickup68" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(196, 228)
+
+[node name="Pickup69" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 228)
+
+[node name="Pickup70" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(76, 220)
+
+[node name="Pickup71" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(148, 220)
+
+[node name="Pickup72" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 220)
+
+[node name="Pickup73" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(196, 220)
+
+[node name="Pickup74" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 220)
+
+[node name="Pickup75" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(76, 212)
+
+[node name="Pickup76" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(148, 212)
+
+[node name="Pickup77" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 212)
+
+[node name="Pickup78" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(196, 212)
+
+[node name="Pickup106" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(204, 212)
+
+[node name="Pickup79" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 212)
+
+[node name="Pickup107" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 204)
+
+[node name="Pickup108" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 204)
+
+[node name="Pickup109" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 196)
+
+[node name="Pickup110" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 196)
+
+[node name="Pickup80" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(60, 212)
+
+[node name="Pickup81" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(68, 212)
+
+[node name="Pickup51" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(36, 236)
+
+[node name="Pickup96" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(20, 188)
+
+[node name="Pickup97" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(28, 188)
+
+[node name="Pickup98" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 188)
+
+[node name="Pickup99" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(180, 188)
+
+[node name="Pickup100" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(188, 188)
+
+[node name="Pickup101" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(196, 188)
+
+[node name="Pickup102" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(204, 188)
+
+[node name="Pickup103" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(44, 188)
+
+[node name="Pickup104" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 188)
+
+[node name="Pickup121" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 180)
+
+[node name="Pickup122" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 180)
+
+[node name="Pickup123" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 172)
+
+[node name="Pickup124" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 172)
+
+[node name="Pickup125" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 164)
+
+[node name="Pickup126" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 164)
+
+[node name="Pickup127" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 156)
+
+[node name="Pickup128" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 156)
+
+[node name="Pickup129" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 148)
+
+[node name="Pickup130" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 148)
+
+[node name="Pickup131" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 140)
+
+[node name="Pickup132" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 140)
+
+[node name="Pickup133" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 132)
+
+[node name="Pickup134" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 132)
+
+[node name="Pickup135" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 124)
+
+[node name="Pickup136" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 124)
+
+[node name="Pickup137" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 116)
+
+[node name="Pickup138" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 116)
+
+[node name="Pickup139" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 108)
+
+[node name="Pickup140" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 108)
+
+[node name="Pickup141" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 100)
+
+[node name="Pickup142" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 100)
+
+[node name="Pickup143" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 92)
+
+[node name="Pickup144" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 92)
+
+[node name="Pickup145" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 84)
+
+[node name="Pickup146" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 84)
+
+[node name="Pickup147" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 76)
+
+[node name="Pickup148" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 76)
+
+[node name="Pickup210" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(12, 84)
+
+[node name="Pickup211" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(12, 76)
+
+[node name="Pickup218" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(76, 84)
+
+[node name="Pickup219" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(76, 76)
+
+[node name="Pickup227" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(148, 84)
+
+[node name="Pickup228" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(148, 76)
+
+[node name="Pickup229" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(212, 84)
+
+[node name="Pickup230" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(212, 76)
+
+[node name="Pickup231" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(12, 60)
+
+[node name="Pickup233" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(212, 60)
+
+[node name="Pickup235" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(12, 44)
+
+[node name="Pickup236" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(212, 44)
+
+[node name="Pickup149" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 68)
+
+[node name="Pickup150" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 68)
+
+[node name="Pickup151" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 60)
+
+[node name="Pickup152" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 60)
+
+[node name="Pickup153" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 52)
+
+[node name="Pickup154" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 52)
+
+[node name="Pickup155" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 44)
+
+[node name="Pickup156" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 44)
+
+[node name="Pickup237" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(100, 60)
+
+[node name="Pickup238" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(100, 52)
+
+[node name="Pickup239" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(100, 44)
+
+[node name="Pickup240" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(124, 60)
+
+[node name="Pickup241" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(124, 52)
+
+[node name="Pickup242" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(124, 44)
+
+[node name="Pickup157" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(172, 36)
+
+[node name="Pickup158" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(52, 36)
+
+[node name="Pickup105" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(36, 188)
+
+[node name="Pickup40" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(12, 204)
+
+[node name="Pickup41" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(12, 196)
+
+[node name="Pickup42" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(12, 188)
+
+[node name="Pickup52" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(212, 204)
+
+[node name="Pickup53" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(212, 196)
+
+[node name="Pickup54" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(212, 188)
+
+[node name="Pickup5" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(100, 260)
+
+[node name="Pickup6" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(100, 252)
+
+[node name="Pickup7" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(100, 244)
+
+[node name="Pickup8" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(100, 236)
+
+[node name="Pickup9" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(124, 260)
+
+[node name="Pickup85" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(84, 212)
+
+[node name="Pickup86" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(92, 212)
+
+[node name="Pickup87" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(132, 212)
+
+[node name="Pickup88" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(140, 212)
+
+[node name="Pickup111" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(156, 188)
+
+[node name="Pickup112" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(164, 188)
+
+[node name="Pickup113" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(76, 188)
+
+[node name="Pickup114" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(148, 188)
+
+[node name="Pickup115" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(60, 188)
+
+[node name="Pickup116" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(68, 188)
+
+[node name="Pickup117" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(84, 188)
+
+[node name="Pickup118" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(92, 188)
+
+[node name="Pickup119" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(132, 188)
+
+[node name="Pickup120" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(140, 188)
+
+[node name="Pickup91" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(100, 212)
+
+[node name="Pickup92" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(124, 212)
+
+[node name="Pickup10" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(124, 252)
+
+[node name="Pickup11" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(124, 244)
+
+[node name="Pickup12" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(124, 236)
+
+[node name="Pickup84" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(100, 204)
+
+[node name="Pickup89" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(100, 196)
+
+[node name="Pickup90" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(100, 188)
+
+[node name="Pickup93" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(124, 204)
+
+[node name="Pickup94" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(124, 196)
+
+[node name="Pickup95" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(124, 188)
+
+[node name="Pickup13" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(212, 260)
+
+[node name="Pickup164" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(12, 68)
+
+[node name="Pickup175" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(20, 68)
+
+[node name="Pickup180" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(28, 68)
+
+[node name="Pickup181" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(36, 68)
+
+[node name="Pickup185" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(44, 68)
+
+[node name="Pickup186" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(60, 68)
+
+[node name="Pickup187" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(68, 68)
+
+[node name="Pickup188" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(76, 68)
+
+[node name="Pickup189" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(84, 68)
+
+[node name="Pickup190" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(92, 68)
+
+[node name="Pickup191" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(132, 68)
+
+[node name="Pickup192" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(140, 68)
+
+[node name="Pickup193" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(148, 68)
+
+[node name="Pickup194" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(156, 68)
+
+[node name="Pickup195" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(164, 68)
+
+[node name="Pickup196" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(180, 68)
+
+[node name="Pickup197" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(188, 68)
+
+[node name="Pickup198" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(196, 68)
+
+[node name="Pickup199" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(204, 68)
+
+[node name="Pickup200" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(108, 68)
+
+[node name="Pickup201" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(116, 68)
+
+[node name="Pickup202" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(100, 68)
+
+[node name="Pickup203" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(124, 68)
+
+[node name="Pickup204" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(212, 68)
+
+[node name="Pickup205" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(12, 92)
+
+[node name="Pickup206" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(20, 92)
+
+[node name="Pickup207" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(28, 92)
+
+[node name="Pickup208" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(36, 92)
+
+[node name="Pickup209" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(44, 92)
+
+[node name="Pickup212" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(76, 92)
+
+[node name="Pickup213" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(84, 92)
+
+[node name="Pickup214" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(92, 92)
+
+[node name="Pickup215" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(132, 92)
+
+[node name="Pickup216" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(140, 92)
+
+[node name="Pickup217" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(148, 92)
+
+[node name="Pickup220" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(180, 92)
+
+[node name="Pickup221" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(188, 92)
+
+[node name="Pickup222" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(196, 92)
+
+[node name="Pickup223" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(204, 92)
+
+[node name="Pickup224" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(100, 92)
+
+[node name="Pickup225" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(124, 92)
+
+[node name="Pickup226" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(212, 92)
+
+[node name="Pickup159" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(12, 36)
+
+[node name="Pickup160" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(20, 36)
+
+[node name="Pickup161" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(28, 36)
+
+[node name="Pickup162" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(36, 36)
+
+[node name="Pickup163" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(44, 36)
+
+[node name="Pickup165" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(60, 36)
+
+[node name="Pickup166" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(68, 36)
+
+[node name="Pickup167" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(76, 36)
+
+[node name="Pickup168" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(84, 36)
+
+[node name="Pickup169" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(92, 36)
+
+[node name="Pickup170" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(132, 36)
+
+[node name="Pickup171" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(140, 36)
+
+[node name="Pickup172" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(148, 36)
+
+[node name="Pickup173" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(156, 36)
+
+[node name="Pickup174" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(164, 36)
+
+[node name="Pickup176" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(180, 36)
+
+[node name="Pickup177" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(188, 36)
+
+[node name="Pickup178" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(196, 36)
+
+[node name="Pickup179" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(204, 36)
+
+[node name="Pickup182" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(100, 36)
+
+[node name="Pickup183" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(124, 36)
+
+[node name="Pickup184" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(212, 36)
+
+[node name="Pickup14" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(212, 252)
+
+[node name="Pickup15" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(212, 244)
+
+[node name="Pickup16" parent="PickupSpawner" instance=ExtResource("4_dqh2q")]
+position = Vector2(212, 236)
+
+[node name="Pickup232" parent="PickupSpawner" instance=ExtResource("7_myyv8")]
+position = Vector2(12, 212)
+
+[node name="Pickup234" parent="PickupSpawner" instance=ExtResource("7_myyv8")]
+position = Vector2(212, 212)
+
+[node name="Pickup243" parent="PickupSpawner" instance=ExtResource("7_myyv8")]
+position = Vector2(12, 52)
+
+[node name="Pickup244" parent="PickupSpawner" instance=ExtResource("7_myyv8")]
+position = Vector2(212, 52)
+
+[node name="Ready" parent="." instance=ExtResource("4_30fuq")]
+offset_left = 88.0
+offset_top = 160.0
+offset_right = 88.0
+offset_bottom = 160.0
+
+[node name="StartAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_gpd5y")
+
+[connection signal="finished" from="StartAudio" to="." method="_on_start_audio_finished"]

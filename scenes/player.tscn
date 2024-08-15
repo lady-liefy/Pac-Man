@@ -1,0 +1,134 @@
+[gd_scene load_steps=23 format=3 uid="uid://btq3opu7jlaxs"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_csjvd"]
+[ext_resource type="Texture2D" uid="uid://dgub66tjqvfmv" path="res://assets/art/maze_parts.png" id="2_qfov6"]
+[ext_resource type="AudioStream" uid="uid://bnweypcol2l22" path="res://assets/audio/pacman_chomp.wav" id="3_5usqn"]
+[ext_resource type="AudioStream" uid="uid://cnuskgv6v32ja" path="res://assets/audio/pacman_death.wav" id="4_u4eul"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdkc5"]
+atlas = ExtResource("2_qfov6")
+region = Rect2(456, 0, 224, 64)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bonn4"]
+animation = &"die"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_68hrj"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_i12d5"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tsx8y"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x10h2"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mwd4q"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gl0sw"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e366v"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hwc16"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_irx8g"]
+states/die/node = SubResource("AnimationNodeAnimation_bonn4")
+states/die/position = Vector2(683, 95)
+states/idle/node = SubResource("AnimationNodeAnimation_68hrj")
+states/idle/position = Vector2(456, 89)
+states/move/node = SubResource("AnimationNodeBlendSpace2D_i12d5")
+states/move/position = Vector2(456, 182)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_tsx8y"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_x10h2"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_mwd4q"), "idle", "die", SubResource("AnimationNodeStateMachineTransition_gl0sw"), "die", "End", SubResource("AnimationNodeStateMachineTransition_e366v"), "move", "die", SubResource("AnimationNodeStateMachineTransition_hwc16")]
+
+[sub_resource type="Animation" id="Animation_cxdnn"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_feo3t"]
+resource_name = "move_left"
+
+[sub_resource type="Animation" id="Animation_ty50s"]
+resource_name = "die"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_833wg"]
+_data = {
+"die": SubResource("Animation_ty50s"),
+"idle": SubResource("Animation_cxdnn"),
+"move_left": SubResource("Animation_feo3t")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_co2jb"]
+radius = 3.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vo6qn"]
+size = Vector2(2, 2)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_86oek"]
+radius = 4.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+process_mode = 1
+z_index = 15
+z_as_relative = false
+collision_mask = 24586
+motion_mode = 1
+platform_floor_layers = 4294918144
+platform_wall_layers = 16384
+script = ExtResource("1_csjvd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_bdkc5")
+hframes = 14
+vframes = 4
+frame = 4
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath(".")
+tree_root = SubResource("AnimationNodeStateMachine_irx8g")
+anim_player = NodePath("AnimationPlayer")
+parameters/move/blend_position = Vector2(0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationTree"]
+libraries = {
+"": SubResource("AnimationLibrary_833wg")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_co2jb")
+
+[node name="DeathCollider" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathCollider"]
+shape = SubResource("RectangleShape2D_vo6qn")
+
+[node name="PickupCollider" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupCollider"]
+shape = SubResource("CircleShape2D_86oek")
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="ChompAudio" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("3_5usqn")
+
+[node name="DeathAudio" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("4_u4eul")
+
+[node name="BarrierCheckRotator" type="Node2D" parent="."]
+
+[node name="BarrierCheck" type="RayCast2D" parent="BarrierCheckRotator"]
+position = Vector2(5, 0)
+rotation = -1.5708
+target_position = Vector2(0, 10)
+collision_mask = 16384
+hit_from_inside = true
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="DeathCollider" to="." method="_on_death_collider_body_entered"]
+[connection signal="area_entered" from="PickupCollider" to="." method="_on_pickup_collider_body_entered"]
