@@ -2,10 +2,14 @@
 extends Node
 
 @onready var player : Player = $Player
-@onready var current_level : Node2D = $Level0
+@onready var current_level : Node2D = $Level
 
 var player_prefab = preload("res://scenes/player.tscn")
+
+var initial_spawn := true
 var next_level_id := 0
+
+signal level_ready
 
 func _ready() -> void:
 	Global.current_level_id = next_level_id
@@ -23,7 +27,8 @@ func clear_level() -> void:
 	for pacman in get_tree().get_nodes_in_group("player"):
 		if is_instance_valid(pacman):
 			pacman.queue_free()
-	
+#	$GhostSpawner.clear_ghosts()
+
 func reset() -> void:
 	clear_level()
 	
@@ -31,17 +36,24 @@ func reset() -> void:
 	
 	if not get_tree().get_nodes_in_group("player"):
 		spawn_player()
+		
+	if not get_tree().get_nodes_in_group("ghost"):
+		$GhostSpawner.spawn_ghosts()
 	
 	# Create the next level
 	var next_level = Global.levels[next_level_id].instantiate()
-	add_child(next_level)
+	self.call_deferred("add_child", next_level)
 	current_level = next_level
+	initial_spawn = true
+	level_ready.emit()
 
 func on_player_died() -> void:
 	player = null
+	initial_spawn = false
 	
 	if ScoreManager.current_lives > 0:
 		spawn_player()
+#		ScoreManager.subtract_life()
 	else:
 		Events.emit_signal("game_over")
 		next_level_id = 0
@@ -71,3 +83,8 @@ func spawn_player() -> void:
 		player.add_to_group("player")
 	
 	player.global_position = Global.initial_position
+	
+	if not initial_spawn:
+		player.set_enabled(true)
+	
+	Events.emit_signal("player_respawned")

@@ -7,17 +7,16 @@ class_name Player
 
 @onready var sprite : AnimationTree = $AnimationTree
 @onready var sprite_playback : AnimationNodeStateMachinePlayback = sprite.get("parameters/playback")
+@onready var check_rotator = $BarrierCheckRotator
 
 @onready var chomp_audio = $Audio/ChompAudio
 @onready var death_audio = $Audio/DeathAudio
-@onready var check_rotator = $BarrierCheckRotator
 
 var input_direction   := Vector2.ZERO
 var initial_direction := Vector2(1.0, 0.0)
 var direction := initial_direction
 var next_direction := direction
 
-var is_teleporting := [false, false]
 var is_energized := false
 var is_eating    := false
 var active       := false
@@ -32,17 +31,21 @@ func _ready() -> void:
 func _initialize_signals() -> void:
 	Events.game_paused.connect(_on_game_paused)
 	Events.game_resumed.connect(_on_game_resumed)
-	Events.level_begun.connect(on_level_begun)
+	Events.level_started.connect(on_level_started)
 	Events.level_won.connect(on_level_won)
 
 # ---------------------- PROCESSES -----------------------------------------------
-func _physics_process(delta : float) -> void:
-	_process_inputs()
-	Global.screen_wrap(self)
+func _physics_process(_delta : float) -> void:
+	# Reset and confirm any input
+	self.input_direction = Vector2.ZERO
+	self.velocity = Vector2.ZERO
+	
 	if !active:
 		return
 	
-	velocity = Vector2.ZERO
+	_process_inputs()
+	Global.screen_wrap(self)
+	
 	if next_direction_check():
 		direction = next_direction
 	
@@ -60,11 +63,7 @@ func _physics_process(delta : float) -> void:
 	
 	self.move(direction)
 
-
 func _process_inputs() -> void:
-	# Reset and confirm any input
-	input_direction = Vector2.ZERO
-	
 	input_direction.x = Input.get_axis("move_left", "move_right")
 	if input_direction.x != 0:
 		return
@@ -94,7 +93,7 @@ func die() -> void:
 #	await sprite.animation_finished
 	await death_audio.finished
 	Events.emit_signal("player_died")
-	self.queue_free()
+	self.call_deferred("queue_free")
 
 func eat(food : Node2D) -> void:
 	if not food.has_method("consume"):
@@ -127,18 +126,18 @@ func eat(food : Node2D) -> void:
 
 func energize() -> void:
 	self.is_energized = true
-	print("ENERGYYY")
-	$Timer.start(energize_time)
-#	get_tree().call_group("ghost", "enter_scared_mode")
+	Events.emit_signal("player_energized")
 
 func _on_death_collider_body_entered(body: Node2D) -> void:
 	if not body is Ghost:
+		print("not a ghost...")
 		return
 		
 	if not self.is_energized:
 		self.die()
 	else:
-		eat(body)
+		print("OMNOM")
+		body.die()
 
 func _on_pickup_collider_body_entered(consumable : Area2D ) -> void:
 	if not consumable is Pickup:
@@ -161,13 +160,10 @@ func _on_game_paused() -> void:
 func _on_game_resumed() -> void:
 	self.set_enabled(true)
 
-func on_level_begun() -> void:
+func on_level_started() -> void:
 	self.set_enabled(true)
 
 func on_level_won() -> void:
 	self.set_enabled(false)
 	$AnimationTree/AnimationPlayer.speed_scale = speed
 	sprite_playback.travel("idle")
-
-func _on_energize_timer_timeout():
-	is_energized = false

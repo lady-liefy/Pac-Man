@@ -9,8 +9,6 @@ extends Node2D
 
 @onready var scene_to_load = Global.scene_paths["Main_Menu"]
 
-signal level_finished
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self._initialize_signals()

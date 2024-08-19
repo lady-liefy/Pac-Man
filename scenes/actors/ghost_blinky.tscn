@@ -1,11 +1,12 @@
-[gd_scene load_steps=36 format=3 uid="uid://dthddglqupib"]
+[gd_scene load_steps=37 format=3 uid="uid://dppd8ny8yestu"]
 
-[ext_resource type="Script" path="res://scripts/ghost.gd" id="1_wd6q5"]
-[ext_resource type="Texture2D" uid="uid://dgub66tjqvfmv" path="res://assets/art/maze_parts.png" id="2_qccnj"]
-[ext_resource type="PackedScene" uid="uid://veosxqpenuwg" path="res://scenes/AI/enemy_ai.tscn" id="3_dot34"]
+[ext_resource type="Script" path="res://scripts/ghost.gd" id="1_wvjyc"]
+[ext_resource type="Texture2D" uid="uid://dgub66tjqvfmv" path="res://assets/art/maze_parts.png" id="2_s4l8n"]
+[ext_resource type="PackedScene" uid="uid://veosxqpenuwg" path="res://scenes/AI/enemy_ai.tscn" id="3_yl53l"]
+[ext_resource type="Script" path="res://scripts/AI/enemy_ai_blinky.gd" id="4_7ea1y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e3tu1"]
-atlas = ExtResource("2_qccnj")
+atlas = ExtResource("2_s4l8n")
 region = Rect2(456, 64, 192, 64)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6s4ax"]
@@ -273,13 +274,13 @@ radius = 3.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkv4c"]
 radius = 1.0
 
-[node name="Ghost" type="CharacterBody2D" node_paths=PackedStringArray("enemy_ai") groups=["ghost"]]
+[node name="Ghost_Blinky" type="CharacterBody2D" node_paths=PackedStringArray("enemy_ai") groups=["ghost"]]
 z_index = 5
 z_as_relative = false
 collision_layer = 2
 collision_mask = 16385
 motion_mode = 1
-script = ExtResource("1_wd6q5")
+script = ExtResource("1_wvjyc")
 eaten_sound_file_path = "res://assets/audio/pacman_eatghost.wav"
 enemy_ai = NodePath("EnemyAI")
 
@@ -319,5 +320,6 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
 shape = SubResource("CircleShape2D_rkv4c")
 
-[node name="EnemyAI" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("3_dot34")]
+[node name="EnemyAI" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("3_yl53l")]
+script = ExtResource("4_7ea1y")
 enemy = NodePath("..")

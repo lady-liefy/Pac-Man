@@ -1,20 +1,47 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3ijkwmrxhxf1"]
+[gd_scene load_steps=8 format=3 uid="uid://c3ijkwmrxhxf1"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_gboxl"]
 [ext_resource type="PackedScene" uid="uid://clunpvoh2n2nl" path="res://scenes/level.tscn" id="3_6wu20"]
 [ext_resource type="PackedScene" uid="uid://btq3opu7jlaxs" path="res://scenes/player.tscn" id="3_18hou"]
 [ext_resource type="PackedScene" uid="uid://7fov7i38bxxu" path="res://scenes/gui.tscn" id="4_2d3a0"]
-[ext_resource type="PackedScene" uid="uid://dthddglqupib" path="res://scenes/ghost.tscn" id="5_mfawg"]
+[ext_resource type="PackedScene" uid="uid://dppd8ny8yestu" path="res://scenes/actors/ghost_blinky.tscn" id="4_kscf5"]
+[ext_resource type="Script" path="res://scripts/ghost_spawner.gd" id="6_sgplt"]
+[ext_resource type="Script" path="res://scripts/AI/shared_enemy_ai.gd" id="7_mqyba"]
 
 [node name="World" type="Node"]
 script = ExtResource("1_gboxl")
 
 [node name="GUI" parent="." instance=ExtResource("4_2d3a0")]
 
-[node name="Level0" parent="." instance=ExtResource("3_6wu20")]
+[node name="Level" parent="." instance=ExtResource("3_6wu20")]
+
+[node name="Ghost_Blinky" parent="." instance=ExtResource("4_kscf5")]
+position = Vector2(112, 117)
 
 [node name="Player" parent="." instance=ExtResource("3_18hou")]
 position = Vector2(112, 212)
 
-[node name="Ghost" parent="." instance=ExtResource("5_mfawg")]
-position = Vector2(112, 116)
+[node name="GhostSpawner" type="Node" parent="."]
+script = ExtResource("6_sgplt")
+
+[node name="SharedEnemyAI" type="Node" parent="."]
+script = ExtResource("7_mqyba")
+
+[node name="ScatterTimer" type="Timer" parent="SharedEnemyAI"]
+process_callback = 0
+wait_time = 7.0
+
+[node name="ChaseTimer" type="Timer" parent="SharedEnemyAI"]
+wait_time = 20.0
+
+[node name="FrightenedTimer" type="Timer" parent="SharedEnemyAI"]
+
+[node name="AIMarkers" type="Node" parent="."]
+
+[node name="EnemyHome" type="Marker2D" parent="AIMarkers"]
+position = Vector2(112, 140)
+gizmo_extents = 8.0
+
+[connection signal="timeout" from="SharedEnemyAI/ScatterTimer" to="SharedEnemyAI" method="_on_scatter_timer_timeout"]
+[connection signal="timeout" from="SharedEnemyAI/ChaseTimer" to="SharedEnemyAI" method="_on_chase_timer_timeout"]
+[connection signal="timeout" from="SharedEnemyAI/FrightenedTimer" to="SharedEnemyAI" method="_on_frightened_timer_timeout"]

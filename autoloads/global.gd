@@ -5,8 +5,24 @@ extends Node2D
 @export var speed_factor := 0.3
 @export var tile_size := 8
 
-@onready var initial_position := Vector2(112, 212)
+@onready var ghost_stats := {
+	0 : Vector2(112, 116),
+	1 : Vector2(112, 116), # NEED TO FIX POSITIONS
+	2 : Vector2(112, 116),
+	3 : Vector2(112, 116)
+}
+@onready var scatter_time := {
+	1: [7, 7, 5, 5],
+	2: [7, 7, 5, 0.016],
+	5: [5, 5, 5, 0.016]
+}
+@onready var chase_time  := {
+	1: [20, 20, 20, -1],
+	2: [20, 20, 1033, -1],
+	5: [20, 20, 1037, -1]
+}
 
+static var initial_position := Vector2(112, 212)
 static var scene_paths = {
 	"World": preload("res://scenes/world.tscn"),
 	"Main_Menu": preload("res://scenes/main_menu.tscn")
@@ -52,7 +68,7 @@ func on_game_won() -> void:
 	_clear_level()
 
 func screen_wrap(body : CharacterBody2D) -> void:
-	if body.global_position.x < 0:
+	if body.global_position.x < (0 - tile_size):
 		body.global_position.x = game_real_size.x
-	elif body.global_position.x > game_real_size.x:
+	elif body.global_position.x > (game_real_size.x + tile_size):
 		body.global_position.x = 0

@@ -7,7 +7,7 @@ var pellet_scn = preload("res://scenes/pellet.tscn")
 var energizer_scn = preload("res://scenes/energizer.tscn")
 
 var pickup_types : Array[String] = []
-var coords  : Array[Vector2] = []
+var coords  : PackedVector2Array = []
 var check := 0
 
 func _ready() -> void:
@@ -49,7 +49,7 @@ func _setup_pickups() -> void:
 			pickup.add_to_group("pickup")
 		
 		pickup.position = pos
-		var d_ = pickup.connect("consumed", Callable(self, "on_pickup_consumed"))
+		var _d = pickup.connect("consumed", Callable(self, "on_pickup_consumed"))
 
 func on_pickup_consumed(pickup : Pickup) -> void:
 	var score_to_add := 0

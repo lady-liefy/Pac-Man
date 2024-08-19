@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://veosxqpenuwg"]
+
+[ext_resource type="Script" path="res://scripts/AI/enemy_ai.gd" id="1_8vkc1"]
+[ext_resource type="Script" path="res://scripts/AI/ai_timer.gd" id="2_idm2j"]
+
+[node name="EnemyAI" type="Node2D"]
+script = ExtResource("1_8vkc1")
+
+[node name="PathfindingTimer" type="Timer" parent="." node_paths=PackedStringArray("enemy_ai")]
+wait_time = 0.05
+script = ExtResource("2_idm2j")
+enemy_ai = NodePath("..")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 4.0
+target_desired_distance = 4.0
+avoidance_enabled = true
+radius = 13.0
+debug_enabled = true
+
+[connection signal="timeout" from="PathfindingTimer" to="." method="_on_pathfinding_timer_timeout"]
+[connection signal="timeout" from="PathfindingTimer" to="PathfindingTimer" method="_on_timeout"]
